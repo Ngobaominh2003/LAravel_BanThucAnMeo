@@ -58,7 +58,7 @@
        <table border="1">
     <tr>
         <th style="text-align: center;"><input type="checkbox"/></th>
-        <th style="text-align: center;">STT</th>
+        <!-- <th style="text-align: center;">STT</th> -->
         <!-- <th>ID</th> -->
         <th style="text-align: center;">Tên tài khoản</th>
         <th style="text-align: center;">Email</th>
@@ -73,7 +73,7 @@
         <td>
             <input type="checkbox"/>
         </td>
-        <td>{{ $loop->iteration }}</td>
+        <!-- <td>{{ $loop->iteration }}</td> -->
         <!-- <td>{{ $user->id }}</td> -->
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>

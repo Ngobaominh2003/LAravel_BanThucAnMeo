@@ -31,7 +31,7 @@ class LoaisanphamController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the incoming request data
+        
         $request->validate([
             'ten_loai_san_pham' => 'required|string',
             'anh' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Giả sử bạn đang tải lên một hình ảnh

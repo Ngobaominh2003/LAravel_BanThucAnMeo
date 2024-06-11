@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-lg-3"></div>
                     <div class="col-lg-5">
-                        <button class="btn btn-sign">ĐĂNG KÝ</button>
+                        <button class="btn btn-sign">Sửa thông tin</button>
                     </div>
                     <div class="col-lg-4"></div>
                 </div>

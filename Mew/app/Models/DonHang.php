@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class DonHang extends Model
 {
@@ -28,4 +29,15 @@ class DonHang extends Model
     }
 
     public $timestamps = false;
+
+    public static function getTotalOrdersByDate($date)
+    {
+        return self::whereDate('ngay_dat_hang', $date)->count();
+    }
+
+    public static function getTotalRevenueByDate($date)
+    {
+        return self::whereDate('ngay_dat_hang', $date)->sum('tong_gia');
+    }
 }
+

@@ -106,6 +106,10 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 Route::get('/DangKy', [LoginController::class, 'index2'])->name('DangKy');
 Route::post('/register', [LoginController::class, 'store'])->name('login.store');
 
+use App\Http\Controllers\Admin\ThongKeController;
+
+Route::get('/ThongKe', [ThongKeController::class, 'index'])->name('ThongKe');
+
 
 
 

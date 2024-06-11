@@ -18,7 +18,7 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">THỐNG KÊ<i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="StaticSales.html" class="dropdown-item">Thống kê bán hàng</a>
+                                    <a href="{{ route('ThongKe') }}" class="dropdown-item">Thống kê bán hàng</a>
                                     <a href="StaticOrder.html" class="dropdown-item">Thống kê đơn hàng</a>
                                 </div>
                             </div>

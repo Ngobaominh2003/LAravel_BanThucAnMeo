@@ -117,7 +117,8 @@
                 </div>
                 <!-- Giá sản phẩm -->
                 <div class="d-flex mt-2" style="margin-bottom: 15px;">
-                    <h5 class="ml-2" style="color:#F27927">Gia Ban: {{ $product->gia }}</h5>
+                <h5 class="ml-2" style="color:#F27927">Gia Ban: {{ number_format($product->gia, 0, ',', '.') }} đ</h5>
+
                     <!-- Giá giảm (nếu có) -->
                     @if($product->gia_giam)
                     <h6 class="ml-4 text-muted" style="margin-top: 3px;"><del>{{ $product->gia_goc }}</del></h6>

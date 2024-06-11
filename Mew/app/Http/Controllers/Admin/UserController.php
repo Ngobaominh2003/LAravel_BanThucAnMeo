@@ -69,10 +69,10 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
 {
-    // Tìm người dùng theo ID
+   
     $user = User::findOrFail($id);
 
-    // Validate dữ liệu đầu vào từ form
+    
     $validatedData = $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email,' . $user->id,
@@ -83,24 +83,21 @@ class UserController extends Controller
         'avatar' => 'nullable|image|max:2048',
     ]);
 
-    // Nếu mật khẩu được cung cấp, mã hóa mật khẩu mới bằng Bcrypt
+   
     if ($request->filled('password')) {
         $validatedData['password'] = Hash::make($validatedData['password']);
     }
 
-    // Nếu người dùng tải lên ảnh mới
+    
     if ($request->hasFile('avatar')) {
-        // Xóa ảnh cũ nếu tồn tại
         
-
-        // Lưu ảnh mới vào thư mục public/img
+        
         $avatarPath = $request->file('avatar')->store('img', 'public');
 
-        // Cập nhật đường dẫn ảnh mới vào dữ liệu người dùng
         $validatedData['avatar'] = $avatarPath;
     }
 
-    // Cập nhật thông tin người dùng trong cơ sở dữ liệu
+    
     $user->update($validatedData);
 
     // Redirect sau khi cập nhật thành công

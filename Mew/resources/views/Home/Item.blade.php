@@ -88,7 +88,8 @@
                                         <a class="h6 text-decoration-none text-truncate" href="Detail_product.html">{{ $product->ten_san_pham }}</a>
                                         <div class="d-flex align-items-center justify-content-center mt-2">
                                             <h6 class="text-muted"><del>{{ $product->gia }}</del></h6>
-                                            <h5 class="ml-2" style="color:#F27927">{{ $product->gia }}</h5>
+                                            <h5 class="ml-2" style="color:#F27927">Gia Ban: {{ number_format($product->gia, 0, ',', '.') }} đ</h5>
+
                                         </div>
                                         <div class="mb-1 mt-2">
                                             <button class="btn btn-buy">Mua Ngay</button>

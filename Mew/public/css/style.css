@@ -86,7 +86,20 @@ p {
         object-fit: cover; /* Đảm bảo hình ảnh được hiển thị đầy đủ trong ô vuông */
     }
 
-
+    .product-img img {
+      max-width: 100%;
+      height: 200px; /* Điều chỉnh độ cao tối đa của hình ảnh */
+      object-fit: cover; /* Hiển thị toàn bộ hình ảnh trong khung mà không làm thay đổi tỷ lệ */
+  }
+  
+  .product-item .text-truncate {
+    max-width: 100%;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+  
 abbr[title],
 abbr[data-original-title] {
   text-decoration: underline;
