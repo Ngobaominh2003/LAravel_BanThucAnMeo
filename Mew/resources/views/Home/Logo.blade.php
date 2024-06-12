@@ -4,29 +4,37 @@
                 
            
             <div class="col-lg-6 text-center text-lg-right">
-                    <!-- Số điện thoại -->
-                    <div class="d-inline-block align-middle">
-                        <label class="label-se-bg mb-0">
-                            <i class="fa fa-phone icon-se-bg"></i>
-                            1800.270.27
-                        </label>
+                <!-- Số điện thoại -->
+                <div class="d-inline-block align-middle">
+                    <label class="label-se-bg mb-0">
+                        <i class="fa fa-phone icon-se-bg"></i>
+                        1800.270.27
+                    </label>
+                </div>
+                <!-- Đăng nhập -->
+                <a href="{{ route('DangNhap') }}">Đăng nhập</a>
+                <label class="label-he-bg">|</label>
+                <!-- Avatar and User Name or Register link -->
+                <div class="d-inline-block align-middle ml-2">
+                    <div class="d-flex" style="margin-top: 10px;">
+                        <a href="{{ Auth::check() ? route('Acc') : '' }}">
+                        @if(Auth::check() && Auth::user()->avatar)
+                            <img src="{{ asset('img/' . Auth::user()->avatar) }}" width="25px" height="25px" style="border-radius: 50%;" />
+                        @else
+                            <img src="img/icon_avtar_comments.png" width="25px" height="25px" style="border-radius: 50%;" />
+                        @endif
+                        </a>
+                        <h6 style="color: #fff; padding-left: 10px; padding-top: 2px;">
+                            @if(Auth::check())
+                                {{ Auth::user()->name }}
+                            @else
+                               
+                            @endif
+                        </h6>
                     </div>
-                    <!-- Logo -->
-                    <div class="d-inline-block align-middle ml-2">
-                    <div class="col-lg-2 text-center text-lg-right">
-                                <div class="d-flex" style="margin-top: 10px;">
-                                    <img src="{{ asset('img/icon_avtar_comments.png') }}" width="25px" height="25px"/>
-                                    <h6 style="color: #fff; padding-left: 10px; padding-top: 2px;">
-                                        @if(Auth::check())
-                                            {{ Auth::user()->name }}
-                                        @else
-                                            
-                                        @endif
-                                    </h6>
-                                </div>
-                            </div>
-                    </div>
+                </div>
             </div>
+
 
         </div>
        

@@ -5,8 +5,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/a', function () {
+    return view('');
 });
 
 
@@ -68,6 +68,8 @@ Route::post('/donhang/create', [OrderController::class, 'create'])->name('donhan
 Route::delete('/donhang/{id}', [OrderController::class, 'destroy'])->name('donhang.destroy');
 Route::get('/print-invoice/{id}', [OrderController::class, 'printInvoice'])->name('print.invoice');
 
+use App\Http\Controllers\Admin\ThongKeController;
+Route::get('/ThongKe', [ThongKeController::class, 'index'])->name('ThongKe');
 
 
 
@@ -86,6 +88,7 @@ Route::get('/SanPham', [HomeController::class, 'Products'])->name('Products');
 Route::get('/QRBank', [HomeController::class, 'QRBank'])->name('QRBank');
 Route::get('/QRMomo', [HomeController::class, 'QRMomo'])->name('QRMomo');
 Route::get('/DangKi', [HomeController::class, 'DangKi'])->name('DangKi');
+Route::get('/acc', [HomeController::class, 'Acc'])->name('Acc');
 
 use App\Http\Controllers\Home\CartController;
 
@@ -105,10 +108,10 @@ Route::get('/DangNhap', [LoginController::class, 'index'])->name('DangNhap');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 Route::get('/DangKy', [LoginController::class, 'index2'])->name('DangKy');
 Route::post('/register', [LoginController::class, 'store'])->name('login.store');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-use App\Http\Controllers\Admin\ThongKeController;
 
-Route::get('/ThongKe', [ThongKeController::class, 'index'])->name('ThongKe');
+
 
 
 

@@ -94,6 +94,15 @@ class HomeController extends Controller
             return view('Home.About', ['loaisanphams' => $loaisanphams]);
             
         }
+        public function Acc()
+        {
+            // Lấy danh sách loại sản phẩm từ cơ sở dữ liệu
+            $loaisanphams = Loaisanpham::all();
+
+            // Trả về view và truyền biến $loaisanphams sang view
+            return view('Home.Acc', ['loaisanphams' => $loaisanphams]);
+            
+        }
 
         
 

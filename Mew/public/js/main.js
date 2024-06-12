@@ -17,8 +17,39 @@
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
-    
-    
+    // Thông báo
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('user-update-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+            const formData = new FormData(this);
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Hiển thị thông báo SweetAlert2 khi cập nhật thành công
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: 'Thông tin người dùng đã được cập nhật thành công.',
+                        timer: 2000, // Thời gian tự động ẩn thông báo sau 2 giây
+                        showConfirmButton: false // Ẩn nút OK
+                    });
+                } else {
+                    throw new Error('Đã có lỗi xảy ra. Vui lòng thử lại.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Đã có lỗi xảy ra. Vui lòng thử lại.');
+            });
+        });
+    });
+
+   // Lắng nghe sự kiện khi số lượng thay đổi
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -32,6 +63,7 @@
         return false;
     });
 
+    
 
     // Vendor carousel
     $('.vendor-carousel').owlCarousel({

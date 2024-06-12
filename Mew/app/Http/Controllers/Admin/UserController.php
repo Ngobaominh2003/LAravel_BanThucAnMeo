@@ -68,41 +68,35 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-   
-    $user = User::findOrFail($id);
-
+    {
+        $user = User::findOrFail($id);
     
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email,' . $user->id,
-        'password' => 'nullable|string|min:6',
-        'phone_number' => 'nullable|string|max:20',
-        'address' => 'nullable|string|max:255',
-        'role' => 'nullable|in:user,employee,admin',
-        'avatar' => 'nullable|image|max:2048',
-    ]);
-
-   
-    if ($request->filled('password')) {
-        $validatedData['password'] = Hash::make($validatedData['password']);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:6',
+            'phone_number' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'role' => 'nullable|in:user,employee,admin',
+            'avatar' => 'nullable|image|max:2048',
+        ]);
+    
+        if ($request->filled('password')) {
+            $validatedData['password'] = Hash::make($validatedData['password']);
+        }
+    
+        if ($request->hasFile('avatar')) {
+            $avatarPath = $request->file('avatar')->store('img', 'public');
+            $validatedData['avatar'] = $avatarPath;
+        }
+    
+        $user->update($validatedData);
+    
+        // Trả về phản hồi JSON với thông báo thành công
+        return redirect()->route('admin.index')->with('success', 'Người dùng đã được thêm thành công.');
     }
-
     
-    if ($request->hasFile('avatar')) {
-        
-        
-        $avatarPath = $request->file('avatar')->store('img', 'public');
 
-        $validatedData['avatar'] = $avatarPath;
-    }
-
-    
-    $user->update($validatedData);
-
-    // Redirect sau khi cập nhật thành công
-    return redirect()->route('admin.index')->with('success', 'Thông tin người dùng đã được cập nhật thành công.');
-}
 
     public function show(User $user)
     {

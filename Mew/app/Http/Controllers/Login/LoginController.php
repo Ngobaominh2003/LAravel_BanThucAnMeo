@@ -80,9 +80,15 @@ class LoginController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function logout(Request $request)
     {
-        //
+        Auth::logout(); // Đăng xuất người dùng hiện tại
+
+        $request->session()->invalidate(); // Invalidate the session
+
+        $request->session()->regenerateToken(); // Regenerate CSRF token
+
+        return redirect()->route('Home'); // Chuyển hướng đến trang đăng nhập
     }
 
     /**

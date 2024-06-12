@@ -22,6 +22,12 @@ class CartController extends Controller
     
      public function index()
     {
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!Auth::check()) {
+            // Chuyển hướng đến trang đăng nhập hoặc một route khác nếu người dùng chưa đăng nhập
+            return redirect()->route('DangNhap')->with('error', 'Vui lòng đăng nhập để xem giỏ hàng.');
+        }
+
         // Giả sử bạn đã có người dùng đã xác thực
         $user = Auth::user();
 
@@ -34,12 +40,18 @@ class CartController extends Controller
         // Chuyển các mặt hàng trong giỏ hàng và danh sách loại sản phẩm tới view
         return view('Home.Cart', compact('cartItems', 'loaisanphams'));
     }
+
         
 
     
     
     public function create(Request $request, $productId)
     {
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!Auth::check()) {
+            return redirect()->route('DangNhap')->with('error', 'Vui lòng đăng nhập để tiếp tục.');
+        }
+
         // Lấy thông tin số lượng từ yêu cầu
         $quantity = $request->input('quantity', 1);
 
@@ -62,8 +74,8 @@ class CartController extends Controller
             ]);
         }
 
-        // Chuyển hướng người dùng đến trang giỏ hàng
-        return redirect()->route('GioHang');
+        // Chuyển hướng người dùng đến trang giỏ hàng với thông báo SweetAlert2
+        return redirect()->route('GioHang')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng.');
     }
         
  

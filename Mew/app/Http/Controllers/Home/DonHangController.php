@@ -15,6 +15,12 @@ class DonHangController extends Controller
     
     public function index()
     {
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!Auth::check()) {
+            // Chuyển hướng đến trang đăng nhập nếu người dùng chưa đăng nhập
+            return redirect()->route('DangNhap')->with('error', 'Vui lòng đăng nhập để tiếp tục.');
+        }
+
         // Giả sử bạn đã có người dùng đã xác thực
         $user = Auth::user();
 
@@ -33,4 +39,5 @@ class DonHangController extends Controller
         // Chuyển các mặt hàng trong giỏ hàng, danh sách loại sản phẩm, tổng giá trị và thông tin người dùng tới view
         return view('Home.ThanhToan', compact('cartItems', 'loaisanphams', 'totalPrice', 'user'));
     }
+
 }

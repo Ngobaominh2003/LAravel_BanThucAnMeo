@@ -59,8 +59,12 @@
             </div>
         </div>
         <div style="text-align: center;">
-            <button class="btn btn-buy">TIẾP TỤC MUA SẮM</button>
-        </div>
+        <form action="{{ route('Home') }}" method="GET">
+            @csrf <!-- Nếu bạn đang sử dụng CSRF protection -->
+            <button type="submit" class="btn btn-buy">TIẾP TỤC MUA SẮM</button>
+        </form>
+</div>
+
     </div>
     <!-- Cart End -->
 

@@ -24,6 +24,9 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <!-- Thông báo -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
@@ -55,24 +58,36 @@
         <h2 class="section-title text-uppercase mx-xl-5 mb-4"><span class="pr-3 title-pay-no-acc">Thông tin người nhận</span></h2>
         <div class="mx-xl-5" style="border:1px solid #D9D9D9">
             <div style="padding:26px">
-                <label>Họ tên:</label>
-                <input type="text" class="form-pay-no-acc" value="{{ $user->name }}" />
-                <label style="margin-top: 30px;">Địa chỉ:</label>
-                <input type="text" class="form-pay-no-acc" value="{{ $user->address }}" />
-                <label style="margin-top: 30px;">Số điện thoại:</label>
-                <input type="text" class="form-pay-no-acc" value="{{ $user->phone_number }}" />
-                <label style="margin-top: 30px;">Email:</label>
-                <input type="text" class="form-pay-no-acc" value="{{ $user->email }}" />
-                <div class="row">
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-5">
-                        <button class="btn btn-sign">Sửa thông tin</button>
-                    </div>
-                    <div class="col-lg-4"></div>
+                <!-- Thêm phần tử để hiển thị thông báo -->
+                <div id="success-message" style="display:none; color: green; font-weight: bold; margin-bottom: 20px;">
+                    Thông tin người nhận đã được cập nhật thành công.
                 </div>
+                
+                <form action="{{ route('admin.update', $user->id) }}" method="POST" id="user-update-form">
+                    @csrf
+                    @method('PUT')
+
+                    <label>Họ tên:</label>
+                    <input type="text" name="name" class="form-pay-no-acc" value="{{ $user->name }}" />
+                    <label style="margin-top: 30px;">Địa chỉ:</label>
+                    <input type="text" name="address" class="form-pay-no-acc" value="{{ $user->address }}" />
+                    <label style="margin-top: 30px;">Số điện thoại:</label>
+                    <input type="text" name="phone_number" class="form-pay-no-acc" value="{{ $user->phone_number }}" />
+                    <label style="margin-top: 30px;">Email:</label>
+                    <input type="text" name="email" class="form-pay-no-acc" value="{{ $user->email }}" />
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-5">
+                            <button type="submit" class="btn btn-sign">Sửa thông tin</button>
+                        </div>
+                        <div class="col-lg-4"></div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+
     <div class="col-lg-7">
         <h2 class="section-title text-uppercase mb-4"><span class="pr-3 title-pay-no-acc">Đơn hàng của bạn</span></h2>
         <div>
@@ -130,12 +145,12 @@
             </div>
             <!-- Button -->
             <form action="{{ route('donhang.create') }}" method="POST">
-    @csrf
-    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-    <!-- Các trường dữ liệu khác của đơn hàng -->
-    <button type="submit" class="btn btn-buy">Mua hàng</button>
+            @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+            <!-- Các trường dữ liệu khác của đơn hàng -->
+            <button type="submit" class="btn btn-buy">Mua hàng</button>
     
-</form>
+            </form>
 
 
             <div style="margin-top:25px;margin-left:10px">

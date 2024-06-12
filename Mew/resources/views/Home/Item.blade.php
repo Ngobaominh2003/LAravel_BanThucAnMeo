@@ -25,6 +25,10 @@
     <!-- Customized Bootstrap Stylesheet -->
     
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+     <!-- Thông báo -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 </head>
 
 <body>
@@ -75,40 +79,66 @@
                 </div>
                 <!-- item1 -->
                 <div class="row px-xl-5">
-                        @foreach($products as $product)
-                            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                                <div class="product-item bg-light mb-4">
+                    @foreach($products as $product)
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
                                 <div class="product-img position-relative overflow-hidden">
                                     <a href="{{ route('CTSanPham', ['product_id' => $product->product_id]) }}">
                                         <img class="img-fluid product-img" src="{{ asset('img/' . $product->hinh_anh) }}" alt="{{ $product->ten_san_pham }}">
                                     </a>
                                 </div>
-
-                                    <div class="text-center py-4">
-                                        <a class="h6 text-decoration-none text-truncate" href="Detail_product.html">{{ $product->ten_san_pham }}</a>
-                                        <div class="d-flex align-items-center justify-content-center mt-2">
-                                            <h6 class="text-muted"><del>{{ $product->gia }}</del></h6>
-                                            <h5 class="ml-2" style="color:#F27927">Gia Ban: {{ number_format($product->gia, 0, ',', '.') }} đ</h5>
-
-                                        </div>
-                                        <div class="mb-1 mt-2">
-                                            <button class="btn btn-buy">Mua Ngay</button>
-                                            <form action="{{ route('cart.create', ['product_id' => $product->product_id]) }}" method="POST" style="display: inline;">
-
-                                                @csrf
-                                                <input type="hidden" name="quantity" value="1"> <!-- Đặt số lượng mặc định là 1 -->
-                                                <button type="submit" class="btn btn-cart">Thêm vào giỏ hàng</button>
-                                            </form>
-
-
-                                        </div>
-
-
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate" href="Detail_product.html">{{ $product->ten_san_pham }}</a>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h6 class="text-muted"><del>{{ $product->gia }}</del></h6>
+                                        <h5 class="ml-2" style="color:#F27927">Gia Ban: {{ number_format($product->gia, 0, ',', '.') }} đ</h5>
+                                    </div>
+                                    <div class="mb-1 mt-2">
+                                        <button class="btn btn-buy">Mua Ngay</button>
+                                        <form class="add-to-cart-form" action="{{ route('cart.create', ['product_id' => $product->product_id]) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            <input type="hidden" name="quantity" value="1"> <!-- Đặt số lượng mặc định là 1 -->
+                                            <button type="submit" class="btn btn-buy">Thêm vào giỏ hàng</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
+                        </div>
+                    @endforeach
+                </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll('.add-to-cart-form').forEach(form => {
+                                form.addEventListener('submit', function(event) {
+                                    event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+                                    const formData = new FormData(this);
+                                    fetch(this.action, {
+                                        method: 'POST',
+                                        body: formData,
+                                    })
+                                    .then(response => {
+                                        if (response.ok) {
+                                            // Hiển thị thông báo khi thêm vào giỏ hàng thành công
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Thành công!',
+                                                text: 'Sản phẩm đã được thêm vào giỏ hàng.',
+                                                timer: 2000, // Thời gian tự động ẩn thông báo sau 2 giây
+                                                showConfirmButton: false // Ẩn nút OK
+                                            });
+                                        } else {
+                                            throw new Error('Đã có lỗi xảy ra. Vui lòng thử lại.');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        alert('Đã có lỗi xảy ra. Vui lòng thử lại.');
+                                    });
+                                });
+                            });
+                        });
+                    </script>
+
 
                 
                 
