@@ -5,9 +5,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-Route::get('/a', function () {
-    return view('');
+Route::get('/', function () {
+    return view('welcome');
 });
+
 
 
 // Route::get('/Menu', function () {
